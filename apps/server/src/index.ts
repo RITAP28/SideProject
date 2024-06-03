@@ -5,6 +5,7 @@ import { storage } from './middleware/multer.upload';
 import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
 import { exec } from 'child_process';
+import path from 'path';
 
 
 const app = express();
@@ -21,7 +22,7 @@ const upload = multer({ storage: storage });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/uploads", express.static("uploads"));
+app.use("./uploads", express.static(path.join(__dirname, 'uploads')));
 
 
 
@@ -35,8 +36,8 @@ app.get('/', (req, res) => {
 app.post('/uploads', upload.single('file'), (req, res) => {
     const lessonId = uuidv4();
     const videoPath = req.file?.path;
-    const outputPath = `/uploads/${lessonId}`;
-    const hlsPath = `${outputPath}/index.m3u8`;
+    const outputPath = path.join(__dirname, 'uploads', lessonId);
+    const hlsPath = path.join(outputPath, 'index.m3u8');
     console.log("hlsPath", hlsPath);
 
     if(!fs.existsSync(outputPath)){
