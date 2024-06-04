@@ -1,7 +1,26 @@
-import { FormEvent } from "react";
+'use client'
+
+import { FormEvent, useState } from "react";
 import signup from "../../actions/signup";
+import { redirect } from "next/navigation";
 
 export default function Signup() {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formdata = new FormData();
+    formdata.append("username", formData.username);
+    formdata.append("email", formData.email);
+    formdata.append("password", formData.password);
+    signup(formdata);
+    redirect('/');
+  };
+
   return (
     <>
       <div>
@@ -9,7 +28,7 @@ export default function Signup() {
           <h1 className="">Create an account</h1>
         </div>
         <div className="">
-          <form action={signup}>
+          <form onSubmit={handleSubmit}>
             <div className="flex flex-row">
               <div className="">
                 <label htmlFor="username" id="username">
@@ -18,7 +37,10 @@ export default function Signup() {
               </div>
               <div className="">
                 <input
-                  id="username"
+                  value={formData.username}
+                  onChange={(e) => {
+                    setFormData({...formData, username: e.target.value});
+                  }}
                   type="text"
                   className=""
                   placeholder="Enter your username"
@@ -33,9 +55,15 @@ export default function Signup() {
               </div>
               <div className="">
                 <input
-                  id="email"
                   type="email"
                   className=""
+                  value={formData.email}
+                  onChange={(e) => {
+                    setFormData({
+                      ...formData,
+                      email: e.target.value
+                    })
+                  }}
                   placeholder="Enter your email"
                 />
               </div>
@@ -48,9 +76,15 @@ export default function Signup() {
               </div>
               <div className="">
                 <input
-                  id="password"
                   type="password"
                   className=""
+                  value={formData.password}
+                  onChange={(e) => {
+                    setFormData({
+                      ...formData,
+                      password: e.target.value
+                    })
+                  }}
                   placeholder="Enter your password"
                 />
               </div>

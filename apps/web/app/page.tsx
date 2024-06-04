@@ -7,6 +7,9 @@ export default async function Page(){
   return (
     <>
     <Appbar />
+    <div>
+      jndscjkndjscknkcjd
+    </div>
     </>
   )
 }
