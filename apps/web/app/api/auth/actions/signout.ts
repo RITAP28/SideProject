@@ -25,7 +25,7 @@ const signout = async (): Promise<ActionResult> => {
         sessionCookie.attributes
     );
 
-    return redirect("/api/auth/components/signin");
+    return redirect("/");
 
 };
 

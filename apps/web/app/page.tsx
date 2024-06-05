@@ -5,13 +5,10 @@ export default async function Page(){
   const { user } = await validateSession();
   return (
     <>
-    <Appbar />
-    <div>
-      {user?.email}
-    </div>
-    <div>
-      {user?.username} <br />
-      {user?.id}
+    <div className="">
+      <div className="w-full">
+        <Appbar />
+      </div>
     </div>
     </>
   )
