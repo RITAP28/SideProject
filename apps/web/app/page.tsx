@@ -1,14 +1,17 @@
 import { Appbar } from "../components/Appbar";
-import { getServerSession } from "next-auth";
+import validateSession from "./api/auth/actions/auth.status";
 
 export default async function Page(){
-  // const session = await getUser();
-  
+  const { user } = await validateSession();
   return (
     <>
     <Appbar />
     <div>
-      jndscjkndjscknkcjd
+      {user?.email}
+    </div>
+    <div>
+      {user?.username} <br />
+      {user?.id}
     </div>
     </>
   )

@@ -1,9 +1,12 @@
-"use client";
+'use client'
 
 import { useState } from "react";
 import login from "../../actions/signin";
+import { useRouter } from "next/navigation";
+// import validateSession from "../../actions/auth.status";
 
 export default function Signin() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -20,7 +23,7 @@ export default function Signin() {
     <>
       <div className="">
         <div className="">
-          <form onSubmit={handleSubmit}>
+          <form action={handleSubmit}>
             <div>
               <label htmlFor="">Email:</label>
               <input

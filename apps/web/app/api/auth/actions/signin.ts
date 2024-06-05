@@ -1,4 +1,4 @@
-"use server";
+'use server'
 
 import prisma from "@repo/db/lib/index";
 import ErrorHandler from "../../../../../server/src/utils/error.handler";
@@ -33,12 +33,14 @@ const login = async (formData: FormData) => {
 
     const session = await lucia.createSession(existingUser.id, {});
     const sessionCookie = lucia.createSessionCookie(session.id);
+    console.log("sessionId: ", session.id);
+    console.log("sessionCookie: ", sessionCookie);
     cookies().set(
       sessionCookie.name,
       sessionCookie.value,
       sessionCookie.attributes
     );
-    return redirect("/");
+    redirect(`/${session.id}`);
   } catch (error) {
     console.error(error);
   }

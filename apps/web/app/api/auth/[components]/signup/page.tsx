@@ -1,12 +1,11 @@
 'use client'
 
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import signup from "../../actions/signup";
-import { redirect } from "next/navigation";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 export default function Signup() {
-  const router = useRouter();
+  // const router = useRouter();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -91,9 +90,7 @@ export default function Signup() {
               </div>
             </div>
             <div className="">
-              <button type="submit" onClick={() => {
-                router.push('/');
-              }}>Register</button>
+              <button type="submit">Register</button>
             </div>
           </form>
         </div>
