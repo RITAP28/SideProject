@@ -3,22 +3,23 @@
 import { FormEvent, useState } from "react";
 import signup from "../../actions/signup";
 import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function Signup() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
   });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    // e.preventDefault();
     const formdata = new FormData();
     formdata.append("username", formData.username);
     formdata.append("email", formData.email);
     formdata.append("password", formData.password);
     signup(formdata);
-    redirect('/');
   };
 
   return (
@@ -90,7 +91,9 @@ export default function Signup() {
               </div>
             </div>
             <div className="">
-              <button type="submit">Register</button>
+              <button type="submit" onClick={() => {
+                router.push('/');
+              }}>Register</button>
             </div>
           </form>
         </div>
@@ -98,23 +101,3 @@ export default function Signup() {
     </>
   );
 }
-
-// async function registerUser(_: any, formData: FormData): Promise<ActionResult> {
-//   "use server";
-//   const username = formData.get("username");
-//   if(typeof username !== "string" || username.length < 3 || username.length > 31) {
-//     return {
-//       error: "Invalid Username"
-//     }
-//   };
-//   const password = formData.get("password");
-//   if(typeof password !== "string" || password.length < 5 || password.length > 30) {
-//     return {
-//       error: "Invalid Password"
-//     }
-//   };
-// }
-
-// interface ActionResult {
-//   error: string;
-// }
