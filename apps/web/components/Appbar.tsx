@@ -19,7 +19,7 @@ export const Appbar = async () => {
               </button>
             </form>
           </div>
-          <div className="mt-2">
+          <div className="mt-3">
             <Link href="/pages/dashboard">
               <button
                 type="button"
